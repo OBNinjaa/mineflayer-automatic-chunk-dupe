@@ -21,4 +21,4 @@ Install my-project with npm
 ![Logo](https://imgur.com/2eDSxXs.png)
 
 ## 🔗 Links
-[![](https://dcbadge.vercel.app/api/server/NysD9gyx7R)](https://dcbadge.vercel.app/api/server/NysD9gyx7R)
+[![](https://dcbadge.vercel.app/api/server/NysD9gyx7R)](https://discord.gg/NysD9gyx7R)
