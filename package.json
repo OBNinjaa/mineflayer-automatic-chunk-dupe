@@ -1,0 +1,28 @@
+{
+  "name": "mineflayer-automatic-chunk-dupe",
+  "version": "1.0.0",
+  "description": "Simple bot which can perform the minecraft chunk dupe automatically",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "no"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OBNinjaa/mineflayer-automatic-chunk-dupe.git"
+  },
+  "keywords": [
+    "mineflayer",
+    "2b2t",
+    "duper"
+  ],
+  "author": "OBNinjaa",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/OBNinjaa/mineflayer-automatic-chunk-dupe/issues"
+  },
+  "homepage": "https://github.com/OBNinjaa/mineflayer-automatic-chunk-dupe#readme",
+  "dependencies": {
+    "colors": "^1.4.0",
+    "mineflayer": "^4.8.0"
+  }
+}
