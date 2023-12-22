@@ -23,6 +23,6 @@
   "homepage": "https://github.com/OBNinjaa/mineflayer-automatic-chunk-dupe#readme",
   "dependencies": {
     "colors": "^1.4.0",
-    "mineflayer": "^4.8.0"
+    "mineflayer": "^4.14.0"
   }
 }
