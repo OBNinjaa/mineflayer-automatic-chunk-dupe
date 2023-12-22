@@ -13,21 +13,22 @@ module.exports = (bot) => {
 
   bot.on("spawn", async () => {
     async function spreadBooks() {
-      const chestPos = new Vec3(-208, 4, 55);
+      const chestPos = new Vec3(9, 4, 13);
       const chest = await bot.openContainer(bot.blockAt(chestPos));
-      await chest.withdraw(387, 0, 16);
-      await chest.withdraw(387, 0, 11);
+      await chest.withdraw(826, 0, 16);
+      await chest.withdraw(826, 0, 11);
 
       bot.simpleClick.leftMouse(28);
       for (let i = 0; i < 20 - 1; i++) {
         await bot.simpleClick.rightMouse(i);
       }
+
       bot.simpleClick.rightMouse(11);
       bot.simpleClick.leftMouse(27);
-      for (let i = 11; i < 27 - 1; i++) {
+      for (let i = 11; i < 28 - 1; i++) {
         await bot.simpleClick.rightMouse(i);
       }
-      bot.simpleClick.rightMouse(26);
+
       chest.close();
       console.log(`[${new Date().toLocaleTimeString().cyan}] ${`Books have been spread`.white}`, colors.yellow(`(1/3)`));
     }
@@ -43,26 +44,22 @@ module.exports = (bot) => {
     }
 
     const blocks = [
-      new block(-210, 4, 55),
-      new block(-211, 4, 55),
-      new block(-212, 4, 55),
+      new block(6, 4, 11),
+      new block(6, 4, 10),
+      new block(6, 4, 9),
       // The coordinates of the repeaters which we destroy so that the items can leave the chunk
     ];
 
-    function breakRedstone(x, y, z) {
-      bot._client.write("block_dig", {
-        status: 0,
-        location: {
-          x: x,
-          y: y,
-          z: z,
-        },
-        face: 1,
+    async function breakRedstone(block) {
+      bot.dig(block, "ignore").catch((e) => {
+        return;
       });
     }
 
     blocks.forEach((block) => {
-      breakRedstone(block.locationX, block.locationY, block.locationZ);
+      const { locationX, locationY, locationZ } = block;
+      const repeater = bot.blockAt(new Vec3(locationX, locationY, locationZ));
+      breakRedstone(repeater);
     });
 
     console.log(`[${new Date().toLocaleTimeString().cyan}] ${`Repeaters have been broken`.white}`, colors.yellow(`(2/3)`));
