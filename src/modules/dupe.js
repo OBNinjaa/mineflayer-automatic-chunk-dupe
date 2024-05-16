@@ -7,16 +7,15 @@ const colors = require("colors");
  */
 
 module.exports = (bot) => {
-  function delay(t) {
-    return new Promise((resolve) => setTimeout(resolve, t));
-  }
-
   bot.on("spawn", async () => {
+    const bookID = bot.registry.itemsByName["written_book"].id;
+
     async function spreadBooks() {
-      const chestPos = new Vec3(9, 4, 13);
+      // The X, Y, and Z coordinates of the chest that contains x16 & x11 written books
+      const chestPos = new Vec3(893, 4, 2094);
       const chest = await bot.openContainer(bot.blockAt(chestPos));
-      await chest.withdraw(826, 0, 16);
-      await chest.withdraw(826, 0, 11);
+      await chest.withdraw(bookID, 0, 16);
+      await chest.withdraw(bookID, 0, 11);
 
       bot.simpleClick.leftMouse(28);
       for (let i = 0; i < 20 - 1; i++) {
@@ -35,19 +34,10 @@ module.exports = (bot) => {
 
     await spreadBooks();
 
-    class block {
-      constructor(x, y, z) {
-        this.locationX = x;
-        this.locationY = y;
-        this.locationZ = z;
-      }
-    }
-
+    // The X, Y, and Z coordinates of the repeaters which we destroy so that the items can leave the chunk
     const blocks = [
-      new block(6, 4, 11),
-      new block(6, 4, 10),
-      new block(6, 4, 9),
-      // The coordinates of the repeaters which we destroy so that the items can leave the chunk
+      [891, 4, 2094],
+      [890, 4, 2094],
     ];
 
     async function breakRedstone(block) {
@@ -56,9 +46,8 @@ module.exports = (bot) => {
       });
     }
 
-    blocks.forEach((block) => {
-      const { locationX, locationY, locationZ } = block;
-      const repeater = bot.blockAt(new Vec3(locationX, locationY, locationZ));
+    blocks.forEach((coords) => {
+      const repeater = bot.blockAt(new Vec3(...coords));
       breakRedstone(repeater);
     });
 
