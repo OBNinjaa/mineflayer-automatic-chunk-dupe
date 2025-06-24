@@ -7,13 +7,21 @@ const colors = require("colors");
  */
 
 module.exports = (bot) => {
-  bot.on("spawn", async () => {
+  bot.once("spawn", async () => {
+    await bot.waitForChunksToLoad();
     const bookID = bot.registry.itemsByName["written_book"].id;
 
     async function spreadBooks() {
       // The X, Y, and Z coordinates of the chest that contains x16 & x11 written books
       const chestPos = new Vec3(893, 4, 2094);
-      const chest = await bot.openContainer(bot.blockAt(chestPos));
+      const chestBlock = bot.blockAt(chestPos);
+
+      if (!chestBlock) {
+        console.error("Chest block not found at", chestPos);
+        return;
+      }
+
+      const chest = await bot.openContainer(chestBlock);
       await chest.withdraw(bookID, 0, 16);
       await chest.withdraw(bookID, 0, 11);
 
